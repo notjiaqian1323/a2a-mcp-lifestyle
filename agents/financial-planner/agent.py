@@ -21,7 +21,7 @@ exchange_rate_mcp_toolset = MCPToolset(
 )
 
 root_agent = LlmAgent(
-    model='gemini-2.0-flash',
+    model='gemini-2.5-flash',
     name='financial_planner',
     description='A helpful assistant that helps with financial planning.',
     instruction=PROMPT,

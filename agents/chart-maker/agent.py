@@ -27,7 +27,7 @@ quickchart_mcp_toolset = MCPToolset(
 )
 
 root_agent = LlmAgent(
-    model='gemini-2.0-flash',
+    model='gemini-2.5-flash',
     name='chart_maker',
     description='A helpful assistant that create chart images from user inputs.',
     instruction=PROMPT,
