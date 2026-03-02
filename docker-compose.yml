@@ -13,7 +13,7 @@ services:
     volumes:
       - ./agents/:/app/agents
     ports:
-      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8088:8080"
 
   adk-apiserver:
     container_name: adk-apiserver
@@ -44,77 +44,77 @@ services:
 
   # AGENTS - let's have some fun with agents!
   agent-a2a-agent-master:
-    container_name: agent-a2a-agent-master
+    container_name: agent-a2a_agent_master
     build:
       context: .
-      dockerfile: agents/a2a-agent-master/ops/Dockerfile.dev
+      dockerfile: agents/a2a_agent_master/ops/Dockerfile.dev
     working_dir: /app
     environment:
       HOST: 0.0.0.0
       PORT: 8083
-      WELL_KNOWN_HOST: agent-a2a-agent-master
+      WELL_KNOWN_HOST: agent-a2a_agent_master
     volumes:
-      - ./agents/a2a-agent-master/:/app
+      - ./agents/a2a_agent_master/:/app
     ports:
       - "127.0.0.1:8083:8083"
 
   agent-hello-world-greeter:
-    container_name: agent-hello-world-greeter
+    container_name: agent-hello_world_greeter
     build:
       context: .
-      dockerfile: agents/hello-world-greeter/ops/Dockerfile.dev
+      dockerfile: agents/hello_world_greeter/ops/Dockerfile.dev
     working_dir: /app
     environment:
       HOST: 0.0.0.0
       PORT: 8084
-      WELL_KNOWN_HOST: agent-hello-world-greeter
+      WELL_KNOWN_HOST: agent-hello_world_greeter
     volumes:
-      - ./agents/hello-world-greeter/:/app
+      - ./agents/hello_world_greeter/:/app
     ports:
       - "127.0.0.1:8084:8084"
 
   agent-google-search:
-    container_name: agent-google-search
+    container_name: agent-google_search
     build:
       context: .
-      dockerfile: agents/google-search/ops/Dockerfile.dev
+      dockerfile: agents/google_search/ops/Dockerfile.dev
     working_dir: /app
     environment:
       HOST: 0.0.0.0
       PORT: 8085
-      WELL_KNOWN_HOST: agent-google-search
+      WELL_KNOWN_HOST: agent-google_search
     volumes:
-      - ./agents/google-search/:/app
+      - ./agents/google_search/:/app
     ports:
       - "127.0.0.1:8085:8085"
 
   agent-financial-planner:
-    container_name: agent-financial-planner
+    container_name: agent-financial_planner
     build:
       context: .
-      dockerfile: agents/financial-planner/ops/Dockerfile.dev
+      dockerfile: agents/financial_planner/ops/Dockerfile.dev
     working_dir: /app
     environment:
       HOST: 0.0.0.0
       PORT: 8086
-      WELL_KNOWN_HOST: agent-financial-planner
+      WELL_KNOWN_HOST: agent-financial_planner
     volumes:
-      - ./agents/financial-planner/:/app
+      - ./agents/financial_planner/:/app
     ports:
       - "127.0.0.1:8086:8086"
 
   agent-chart-maker:
-    container_name: agent-chart-maker
+    container_name: agent-chart_maker
     build:
       context: .
-      dockerfile: agents/chart-maker/ops/Dockerfile.dev
+      dockerfile: agents/chart_maker/ops/Dockerfile.dev
     working_dir: /app
     environment:
       HOST: 0.0.0.0
       PORT: 8087
-      WELL_KNOWN_HOST: agent-chart-maker
+      WELL_KNOWN_HOST: agent-chart_maker
     volumes:
-      - ./agents/chart-maker/:/app
+      - ./agents/chart_maker/:/app
     ports:
       - "127.0.0.1:8087:8087"
 
