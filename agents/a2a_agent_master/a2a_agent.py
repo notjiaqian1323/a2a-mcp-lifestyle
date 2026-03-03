@@ -36,18 +36,19 @@ def get_a2a_routes(fqdn: str):
     # A2A Agent Skill definition
     skill = AgentSkill(
         id="a2a_agent_master",
-        name="Task Delegation tool",
-        description="A helpful assistant help delegate tasks to other agents",
-        tags=["agent task delegation"],
+        name="TARUMT Onboarding Coordinator", # UPDATED
+        description="A master assistant that delegates tasks to specialized TARUMT agents.", # UPDATED
+        tags=["university", "onboarding", "delegation"], # UPDATED
         examples=[
-            "Help me find the latest news on AI"
+            "How long does it take to drive to the Setapak campus right now?", # UPDATED
+            "What is TARUMT?", # UPDATED
         ],
     )
 
     # A2A Agent Card definition
     agent_card = AgentCard(
-        name="A2A Agent Master",
-        description="An agent that is master of all agents",
+        name="TARUMT Master Agent", # UPDATED
+        description="The central intelligence for TARUMT student onboarding.", # UPDATED
         url=fqdn,
         version="1.0.0",
         defaultInputModes=["text"],

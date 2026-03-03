@@ -6,12 +6,13 @@ from mcp.server.fastmcp import FastMCP
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-# 1. Initialize the MCP Server
-mcp = FastMCP("Google-Maps-TARUMT")
 
 # Define Host and Port for streamable-http (Matches Docker config)
 HOST = os.getenv("HOST", "0.0.0.0")
 PORT = int(os.getenv("PORT", 9002))
+
+# 1. Initialize the MCP Server (Pass host and port HERE)
+mcp = FastMCP("Google-Maps-TARUMT", host=HOST, port=PORT)
 
 # 2. Grab the API Key from the environment
 api_key = os.getenv("GOOGLE_MAPS_API_KEY")
@@ -58,16 +59,7 @@ def calculate_commute(origin: str, destination: str, mode: str = "driving") -> s
     except Exception as e:
         return f"An API error occurred: {str(e)}"
 
-# Start the server using streamable-http
-def start_mcp_server():
-    asyncio.run(
-        mcp.run_async(
-            transport="streamable-http",
-            host=HOST,
-            port=PORT,
-        )
-    )
-
 if __name__ == "__main__":
-    start_mcp_server()
+    # Start the server using streamable-http. (No host/port needed here anymore!)
+    mcp.run(transport="streamable-http")
 
