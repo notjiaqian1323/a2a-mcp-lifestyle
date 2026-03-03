@@ -6,6 +6,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from google.adk.agents import LlmAgent
 from src.a2a_tools.google_search import GoogleSearchAgent
 from src.a2a_tools.google_maps import GoogleMapsAgent
+from src.a2a_tools.pdf_parser import PdfParserAgent
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -14,10 +15,12 @@ PROMPT = """
     You are the official TARUMT Student Onboarding Assistant. You are able to delegate tasks to the appropriate agents.
     - For general queries, use the Google Search agent.
     - For routing, commute times, or navigation to campus, delegate to the Google Maps agent.
+    - For reading, extracting, or parsing text from timetables or PDF URLs, delegate to the PDF Parser agent.
 """
 
 google_search_agent = GoogleSearchAgent(agent_url=os.getenv("GOOGLE_SEARCH_AGENT_URL"))
 google_maps_agent = GoogleMapsAgent(agent_url=os.getenv("GOOGLE_MAPS_AGENT_URL"))
+pdf_parser_agent = PdfParserAgent(agent_url=os.getenv("PDF_PARSER_AGENT_URL"))
 
 root_agent = LlmAgent(
     model='gemini-2.5-flash',
@@ -27,5 +30,6 @@ root_agent = LlmAgent(
     tools=[
         google_search_agent.invoke_google_search_agent_via_a2a,
         google_maps_agent.invoke_google_maps_agent_via_a2a,
+        pdf_parser_agent.invoke_pdf_parser_agent_via_a2a,
     ],
 )

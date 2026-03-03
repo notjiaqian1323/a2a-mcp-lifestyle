@@ -15,19 +15,17 @@ from a2a.types import (
 
 from google.adk.tools import ToolContext
 
-class GoogleMapsAgent:
+class PdfParserAgent:
     def __init__(self, agent_url: str):
         self.agent_url = agent_url
 
-    async def invoke_google_maps_agent_via_a2a(
-            self, query: str, tool_context: ToolContext
+    async def invoke_pdf_parser_agent_via_a2a(
+            self, document_query: str, tool_context: ToolContext
     ):
-
-
-        """Send a query to the google maps agent to get travel times, distances, and routing information.
+        """Send a document URL or parsing request to the PDF Parser Agent.
 
         Args:
-            query: The navigation or routing query to send to the google maps agent (e.g. "How long to drive from Subang to TARUMT?")
+            document_query: The request containing the URL of the document/PDF to be parsed (e.g., "Parse this timetable at https://...")
         """
         request = SendMessageRequest(
             id=str(uuid4()),
@@ -37,7 +35,7 @@ class GoogleMapsAgent:
                     taskId=tool_context.state.get('task_id'),
                     messageId=str(uuid4()),
                     role=Role.user,
-                    parts=[Part(TextPart(text=query))],
+                    parts=[Part(TextPart(text=document_query))],
                 )
             ),
         )
@@ -63,7 +61,7 @@ class GoogleMapsAgent:
             task_updater.update_status(
                 TaskState.working,
                 message=task_updater.new_agent_message(
-                    [Part(TextPart(text='Waiting for Google Maps agent to calculate route...'))]
+                    [Part(TextPart(text='Waiting for PDF Parser Agent to read the document...'))]
                 ),
             )
         except Exception as e:

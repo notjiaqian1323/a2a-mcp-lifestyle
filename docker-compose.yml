@@ -90,6 +90,25 @@ services:
     ports:
       - "127.0.0.1:8089:8089"
 
+    # 2. The PDF Parser A2A Agent (The Brain)
+  agent-pdf-parser:
+      container_name: agent-pdf-parser
+      build:
+        context: .
+        dockerfile: agents/pdf_parser/ops/Dockerfile.dev
+      working_dir: /app
+      environment:
+        HOST: 0.0.0.0
+        PORT: 8090
+        WELL_KNOWN_HOST: agent-pdf-parser
+      env_file:
+        - agents/pdf_parser/.env
+      volumes:
+        - ./agents/pdf_parser/:/app
+        - ./workspace/:/workspace  # The Brain also needs to see the workspace!
+      ports:
+        - "127.0.0.1:8090:8090"
+
   mcp-server-google-maps:
     container_name: mcp-server-google-maps
     build:
@@ -105,3 +124,13 @@ services:
       - ./mcp-servers/google-maps/:/app
     ports:
       - "127.0.0.1:9002:9002"
+
+  mcp-server-markitdown:
+    container_name: mcp-server-markitdown
+    image: ghcr.io/klavis-ai/markitdown-mcp-server:latest
+    environment:
+      PORT: 5000
+    volumes:
+      - ./workspace/:/workspace  # Put your TARUMT PDFs in here!
+    ports:
+      - "127.0.0.1:5000:5000"
